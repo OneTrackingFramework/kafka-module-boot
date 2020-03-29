@@ -30,7 +30,7 @@ public class UserUpdatedConfig extends KafkaConfigs {
   /// ---- reciever -----
   @Bean
   @ConditionalOnMissingBean(name = "kafkaListenerContainerFactory")
-  public ConsumerFactory<String, UserUpdated> kafkaConsumerFactory() {
+  public ConsumerFactory<String, UserUpdated> userUpdatedkafkaConsumerFactory() {
     return new DefaultKafkaConsumerFactory<>(
         consumerConfig(),
         new StringDeserializer(),
@@ -42,7 +42,7 @@ public class UserUpdatedConfig extends KafkaConfigs {
 
     final ConcurrentKafkaListenerContainerFactory<String, UserUpdated> factory =
         new ConcurrentKafkaListenerContainerFactory<>();
-    factory.setConsumerFactory(kafkaConsumerFactory());
+    factory.setConsumerFactory(userUpdatedkafkaConsumerFactory());
     return factory;
   }
 

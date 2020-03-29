@@ -16,7 +16,7 @@ public class UserProducer {
 
 
   public void userUpdated(UserUpdated userUpdated) {
-    this.userUpdatedProducer.send("usersLocated", userUpdated.id, userUpdated);
+    this.userUpdatedProducer.send("users", userUpdated.id, userUpdated);
   }
 
 }
