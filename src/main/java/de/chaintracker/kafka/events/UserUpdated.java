@@ -1,14 +1,12 @@
 package de.chaintracker.kafka.events;
 
 
-import de.chaintracker.entity.User;
-
-import java.time.OffsetDateTime;
-
-public class UserCreated
+public class UserUpdated
 {
 
-    public String eventType = "UserCreate";
+    public String id;
+
+    public String eventType = "UserUpdated";
 
     public String userKey;
 
@@ -21,4 +19,8 @@ public class UserCreated
     public String userName;
 
     public String qrCode;
+
+    public String password;
+
+    public String state;
 }
