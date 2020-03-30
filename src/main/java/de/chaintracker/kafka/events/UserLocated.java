@@ -1,11 +1,13 @@
 package de.chaintracker.kafka.events;
 
+import lombok.Builder;
+import lombok.Data;
 
-public class UserLocated
-{
+@Data
+@Builder
+public class UserLocated {
 
-    // WKT
-    public String location;
+  private String location;
 
-    public String userKey;
+  private String userKey;
 }

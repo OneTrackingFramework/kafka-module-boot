@@ -1,26 +1,31 @@
 package de.chaintracker.kafka.events;
 
+import lombok.Builder;
+import lombok.Data;
 
-public class UserUpdated
-{
+@Data
+@Builder
+public class UserUpdated {
 
-    public String id;
+  public static final String TOPIC = "users";
 
-    public String eventType = "UserUpdated";
+  private String id;
 
-    public String userKey;
+  // private String eventType = "UserUpdated";
 
-    public String email;
+  private String userKey;
 
-    public String firstName;
+  private String email;
 
-    public String lastName;
+  private String firstName;
 
-    public String userName;
+  private String lastName;
 
-    public String qrCode;
+  private String userName;
 
-    public String password;
+  private String qrCode;
 
-    public String state;
+  private String password;
+
+  private String state;
 }

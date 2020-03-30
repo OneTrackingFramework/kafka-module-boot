@@ -1,22 +1,26 @@
 package de.chaintracker.kafka.producers;
 
 
-import de.chaintracker.kafka.events.UserLocated;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import de.chaintracker.kafka.events.UserLocated;
 
 @Service
+@ConditionalOnProperty(
+    value = "app.kafka.producer.UserLocated.enabled",
+    havingValue = "true")
 public class UserLocatedProducer {
 
-    private KafkaTemplate<String, UserLocated> userProducer;
+  private final KafkaTemplate<String, UserLocated> userProducer;
 
-    public UserLocatedProducer(KafkaTemplate<String, UserLocated> userProducer) {
-        this.userProducer = userProducer;
-    }
+  public UserLocatedProducer(final KafkaTemplate<String, UserLocated> userProducer) {
+    this.userProducer = userProducer;
+  }
 
-    public void send(UserLocated event) {
+  public void send(final UserLocated event) {
 
-        userProducer.send("usersLocated", event.userKey, event);
-    }
+    this.userProducer.send("usersLocated", event.getUserKey(), event);
+  }
 }
 
