@@ -1,9 +1,9 @@
-package one.tracking.framework.producers;
+package one.tracking.framework.kafka.producers;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-import one.tracking.framework.events.UserUpdated;
+import one.tracking.framework.kafka.events.UserUpdated;
 
 @Service
 @ConditionalOnProperty(

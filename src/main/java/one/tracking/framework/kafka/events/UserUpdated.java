@@ -1,4 +1,4 @@
-package one.tracking.framework.events;
+package one.tracking.framework.kafka.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

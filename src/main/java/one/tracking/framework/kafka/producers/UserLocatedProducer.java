@@ -1,10 +1,10 @@
-package one.tracking.framework.producers;
+package one.tracking.framework.kafka.producers;
 
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-import one.tracking.framework.events.UserLocated;
+import one.tracking.framework.kafka.events.UserLocated;
 
 @Service
 @ConditionalOnProperty(

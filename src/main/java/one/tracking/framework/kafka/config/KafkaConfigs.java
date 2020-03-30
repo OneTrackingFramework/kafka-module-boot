@@ -1,4 +1,4 @@
-package one.tracking.framework.config;
+package one.tracking.framework.kafka.config;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,11 +1,11 @@
-package one.tracking.framework.consumers;
+package one.tracking.framework.kafka.consumers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import one.tracking.framework.events.UserUpdated;
+import one.tracking.framework.kafka.events.UserUpdated;
 
 @Service
 @ConditionalOnProperty(

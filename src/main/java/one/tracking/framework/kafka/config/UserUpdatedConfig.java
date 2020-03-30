@@ -1,4 +1,4 @@
-package one.tracking.framework.config;
+package one.tracking.framework.kafka.config;
 
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -12,7 +12,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
-import one.tracking.framework.events.UserUpdated;
+import one.tracking.framework.kafka.events.UserUpdated;
 
 @Configuration
 @EnableKafka
