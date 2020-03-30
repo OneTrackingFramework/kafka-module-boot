@@ -1,14 +1,17 @@
 package de.chaintracker.kafka.config;
 
-import de.chaintracker.kafka.events.UserLocated;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
-import org.springframework.kafka.core.*;
-import de.chaintracker.kafka.events.UserLocated;
+import org.springframework.kafka.core.ConsumerFactory;
+import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.core.DefaultKafkaProducerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
+import de.chaintracker.kafka.events.UserLocated;
 
 @Configuration
 public class UserLocatedConfig extends KafkaConfigs {
@@ -25,22 +28,21 @@ public class UserLocatedConfig extends KafkaConfigs {
   }
 
 
-
   /// ---- consumer -----
   @Bean
   @ConditionalOnMissingBean(name = "kafkaListenerContainerFactory")
   public ConsumerFactory<String, UserLocated> kafkaUserLocatedConsumerFactory() {
     return new DefaultKafkaConsumerFactory<>(
-            consumerConfig(),
-            new StringDeserializer(),
-            new JsonDeserializer<>(UserLocated.class));
+        consumerConfig(),
+        new StringDeserializer(),
+        new JsonDeserializer<>(UserLocated.class));
   }
 
   @Bean
   public ConcurrentKafkaListenerContainerFactory<String, UserLocated> userLocatedKafkaListenerContainerFactory() {
 
     final ConcurrentKafkaListenerContainerFactory<String, UserLocated> factory =
-            new ConcurrentKafkaListenerContainerFactory<>();
+        new ConcurrentKafkaListenerContainerFactory<>();
     factory.setConsumerFactory(kafkaUserLocatedConsumerFactory());
     return factory;
   }
