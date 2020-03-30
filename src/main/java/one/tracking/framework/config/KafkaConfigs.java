@@ -1,4 +1,4 @@
-package de.chaintracker.kafka.config;
+package one.tracking.framework.config;
 
 import java.util.HashMap;
 import java.util.Map;

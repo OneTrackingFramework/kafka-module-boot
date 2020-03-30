@@ -1,4 +1,4 @@
-package de.chaintracker.kafka.events;
+package one.tracking.framework.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

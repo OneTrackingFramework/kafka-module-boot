@@ -1,9 +1,10 @@
-package de.chaintracker.kafka.config;
+package one.tracking.framework.config;
 
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
@@ -11,41 +12,44 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
-import de.chaintracker.kafka.events.UserLocated;
+import one.tracking.framework.events.UserUpdated;
 
 @Configuration
-public class UserLocatedConfig extends KafkaConfigs {
+@EnableKafka
+public class UserUpdatedConfig extends KafkaConfigs {
+
+  // ---- sender -----
 
   @Bean
-  public ProducerFactory<String, UserLocated> userLocatedProducerFactory() {
+  public ProducerFactory<String, UserUpdated> userUpdatedProducerFactory() {
     return new DefaultKafkaProducerFactory<>(senderConfigs());
   }
 
-
   @Bean
-  public KafkaTemplate<String, UserLocated> userLocatedKafkaTemplate() {
-    return new KafkaTemplate<>(userLocatedProducerFactory());
+  public KafkaTemplate<String, UserUpdated> userUpdatedKafkaTemplate() {
+    return new KafkaTemplate<>(userUpdatedProducerFactory());
   }
 
 
-  /// ---- consumer -----
+  /// ---- reciever -----
   @Bean
   @ConditionalOnMissingBean(name = "kafkaListenerContainerFactory")
-  public ConsumerFactory<String, UserLocated> kafkaUserLocatedConsumerFactory() {
+  public ConsumerFactory<String, UserUpdated> userUpdatedkafkaConsumerFactory() {
     return new DefaultKafkaConsumerFactory<>(
         consumerConfig(),
         new StringDeserializer(),
-        new JsonDeserializer<>(UserLocated.class));
+        new JsonDeserializer<>(UserUpdated.class));
   }
 
   @Bean
-  public ConcurrentKafkaListenerContainerFactory<String, UserLocated> userLocatedKafkaListenerContainerFactory() {
+  public ConcurrentKafkaListenerContainerFactory<String, UserUpdated> userUpdatedKafkaListenerContainerFactory() {
 
-    final ConcurrentKafkaListenerContainerFactory<String, UserLocated> factory =
+    final ConcurrentKafkaListenerContainerFactory<String, UserUpdated> factory =
         new ConcurrentKafkaListenerContainerFactory<>();
-    factory.setConsumerFactory(kafkaUserLocatedConsumerFactory());
+    factory.setConsumerFactory(userUpdatedkafkaConsumerFactory());
     return factory;
   }
+
 
 
 }
