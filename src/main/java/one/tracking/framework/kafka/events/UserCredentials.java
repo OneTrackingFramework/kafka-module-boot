@@ -9,27 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserUpdated {
+public class UserCredentials {
 
   public static final String TOPIC = "users";
 
-  private String id;
-
-  // private String eventType = "UserUpdated";
-
-  private String userKey;
+  private String userId;
 
   private String email;
 
-  private String firstName;
-
-  private String lastName;
-
-  private String userName;
-
-  private String qrCode;
-
-  private String password;
-
-  private String state;
+  private String encrytedPassword;
 }
