@@ -59,4 +59,12 @@
 			<url>https://maven.pkg.github.com/OneTrackingFramework/kafka-module-boot</url>
 		</repository>
 	</distributionManagement>
+
+	<scm>
+		<connection>scm:git:https://github.com/OneTrackingFramework/kafka-module-boot.git</connection>
+		<developerConnection>scm:git:https://github.com/OneTrackingFramework/kafka-module-boot.git</developerConnection>
+		<url>https://github.com/OneTrackingFramework/kafka-module-boot.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
 </project>
