@@ -4,6 +4,7 @@ import java.util.Map;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+import one.tracking.framework.kafka.consumer.handler.IUserCredentialsEventHandler;
 
 @Configuration
 @EnableKafka
@@ -24,13 +26,6 @@ public class UserCredentialsConfig extends KafkaConfigs {
     return new DefaultKafkaProducerFactory<>(senderConfigs());
   }
 
-  @Override
-  public Map<String, Object> senderConfigs() {
-    final Map<String, Object> props = super.senderConfigs();
-    props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-    return props;
-  }
-
   @Bean(name = "kafka.template.UserCredentials")
   public KafkaTemplate<String, String> userCredentialsKafkaTemplate() {
     return new KafkaTemplate<>(userCredentialsProducerFactory());
@@ -38,6 +33,7 @@ public class UserCredentialsConfig extends KafkaConfigs {
 
   @Bean(name = "kafka.consumer.UserCredentials")
   @ConditionalOnMissingBean(name = "kafkaListenerContainerFactory")
+  @ConditionalOnBean(IUserCredentialsEventHandler.class)
   public ConsumerFactory<String, String> consumerFactory() {
     return new DefaultKafkaConsumerFactory<>(
         consumerConfig(),
@@ -46,11 +42,19 @@ public class UserCredentialsConfig extends KafkaConfigs {
   }
 
   @Bean(name = "kafka.listener.UserCredentials")
+  @ConditionalOnBean(IUserCredentialsEventHandler.class)
   public ConcurrentKafkaListenerContainerFactory<String, String> listenerContainerFactory() {
 
     final ConcurrentKafkaListenerContainerFactory<String, String> factory =
         new ConcurrentKafkaListenerContainerFactory<>();
     factory.setConsumerFactory(consumerFactory());
     return factory;
+  }
+
+  @Override
+  public Map<String, Object> senderConfigs() {
+    final Map<String, Object> props = super.senderConfigs();
+    props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+    return props;
   }
 }
