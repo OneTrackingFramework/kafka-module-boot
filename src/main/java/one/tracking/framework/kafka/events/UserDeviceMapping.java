@@ -23,14 +23,4 @@ public class UserDeviceMapping {
      * The device token / id to send the push notification to.
      */
     private String deviceToken;
-    /**
-     * The type of device to send the push notification to.
-     */
-    private DeviceType deviceType;
-
-    /**
-     * Available device types.
-     * Hint: Firebase can be iOS and Android.
-     */
-    public enum DeviceType {IOS, FIREBASE}
 }
