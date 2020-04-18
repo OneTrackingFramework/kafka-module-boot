@@ -13,7 +13,7 @@ public class UserDeviceMappingDeletion {
     /**
      * The Kafka topic to delete user to device mapping.
      */
-    public static final String TOPIC = "delete-user-device-mapping";
+    public static final String TOPIC = "delete_user_device_mapping";
 
     /**
      * The unique id of the user.

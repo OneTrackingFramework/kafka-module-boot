@@ -14,7 +14,7 @@ public class UserDeviceMapping {
     /**
      * The Kafka topic to create user to device mapping.
      */
-    public static final String TOPIC = "create-user-device-mapping";
+    public static final String TOPIC = "create_user_device_mapping";
     /**
      * The unique id of the user.
      */

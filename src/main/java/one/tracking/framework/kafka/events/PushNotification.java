@@ -13,7 +13,7 @@ public class PushNotification {
     /**
      * The Kafka topic to send push notifications.
      */
-    public static final String TOPIC = "push-notification";
+    public static final String TOPIC = "push_notification";
 
     /**
      * The unique id of the user.
